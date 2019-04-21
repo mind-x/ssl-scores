@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+          <style type="text/css">
+            table {
+                  border-collapse: collapse;
+            }
+            th {
+                  text-align: inherit;
+            }
+            td {
+                text-align: center;
+            }
+            .table {
+                width: 100%;
+                margin-bottom: 1rem;
+                color: #212529;
+            }
+            .table th,
+            .table td {
+                padding: 0.75rem;
+                vertical-align: top;
+                border: 1px solid #dee2e6;
+            }
+            .table thead th {
+                vertical-align: bottom;
+                border-bottom: 2px solid #dee2e6;
+            }
+            .table tbody + tbody {
+                border-top: 2px solid #dee2e6;
+            }
+            .table .thead-light th {
+                color: #495057;
+                background-color: #e9ecef;
+                border-color: #dee2e6;
+            }
+            .table-success,
+            .table-success > th,
+            .table-success > td {
+                background-color: #c3e6cb;
+                font-weight: bold;
+            }
+            .table-success th,
+            .table-success td,
+            .table-success thead th,
+            .table-success tbody + tbody {
+                border-color: #8fd19e;
+            }
+            .table-warning,
+            .table-warning > th,
+            .table-warning > td {
+                background-color: #ffeeba;
+                font-weight: bold;
+            }
+            .table-warning th,
+            .table-warning td,
+            .table-warning thead th,
+            .table-warning tbody + tbody {
+                border-color: #ffdf7e;
+            }
+            .table-danger,
+            .table-danger > th,
+            .table-danger > td {
+                background-color: #f5c6cb;
+                font-weight: bold;
+            }
+            .table-danger th,
+            .table-danger td,
+            .table-danger thead th,
+            .table-danger tbody + tbody {
+                border-color: #ed969e;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                margin-top: 0;
+                margin-bottom: 0.5rem;
+                text-align: center;
+            }
+          </style>
+    </head>
+    <body>
+        <h1>Weekly report</h1>
+        <table cellpadding="0" cellspacing="0" class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Domain (IP)</th>
+                    <th scope="col">Grade</th>
+                    <th scope="col">Issuer</th>
+                    <th scope="col">Expires</th>
+                </tr>
+            </thead>
+        {% for result in data %}
+            <tbody>
+            <tr>
+                <th scope="row"><a href="https://www.ssllabs.com/ssltest/analyze.html?d={{ result.domain }}&latest">{{ result.domain }}</a> ({{ result.ip }})</td>
+            {% if result.error %}
+                <td colspan="3" class="table-danger">{{ result.error }}</td>
+            </tr>
+            {% else %}
+                {% if result.grade == 'A' or result.grade == 'A+' %}
+                <td class="table-success">{{ result.grade }}</td>
+                {% elif result.grade == 'B' or result.grade == 'C' %}
+                <td class="table-warning">{{ result.grade }}</td>
+                {% else %}
+                <td class="table-danger">{{ result.grade }}</td>
+                {% endif %}
+                <td>{{ result.issuer }}</td>
+                {% if result.lifetime < 604800 %}
+                <td class="table-danger">{{ result.expires }}</td>
+                {% elif result.lifetime < 2592000 %}
+                <td class="table-warning">{{ result.expires }}</td>
+                {% else %}
+                <td>{{ result.expires }}</td>
+                {% endif %}
+            </tr>
+            {% endif %}
+            </tbody>
+        {% endfor %}
+        </table>
+     </body>
+</html>
