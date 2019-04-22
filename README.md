@@ -20,7 +20,7 @@ ssl_scores.py -c /path/to/config.json
 
 ### Options
 
-|        Option      |  Value	  |                  Description                            |
+|        Option      |  Value	|                  Description                            |
 |--------------------|----------|---------------------------------------------------------|
 |  -h, --help        |          | show this help message and exit                         |
 |  -d, --domain      |          | Analyzing domain names (FQDN).                          |
@@ -32,7 +32,7 @@ ssl_scores.py -c /path/to/config.json
 
 ### Configuration file options
 
-| Config option | Description|
+| Config option         |                         Description                           |
 |-----------------------|---------------------------------------------------------------|
 | cache                 | Same as `--frome-cache` option.                               |
 | max_age               | Same as `--maxage` option.                                    |
