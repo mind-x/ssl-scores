@@ -145,7 +145,7 @@ def save_results(results,filename):
 
 
 # Create plain text and HTML reports 
-def create_reports(results,limit,templates_path):
+def create_reports(results,templates_path):
 
     # Formatting report in plain text
     plain_text = ''
@@ -240,7 +240,7 @@ def main():
             save_results(results_full,filename)
         
         if config['sender'] == 'mail':
-            plain_text,html_report = create_reports(results_full,config['limit'],config['templates'])
+            plain_text,html_report = create_reports(results_full,config['templates'])
             mailsend(config['subject'],config['sendby'],config['recipients'],plain_text,html_report)
     else:
         optionparser.print_help()

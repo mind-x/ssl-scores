@@ -6,7 +6,6 @@
     "tmp_path": "/ssl-scores/tmp/",
     "templates": "/ssl-scores/templates/",
     "logfile": "/ssl-scores/logs/ssl-scores.log",
-    "limit": 604800,
     "sender": "mail",
     "subject": "SSL Report",
     "sendby": "sslscores@domain.com",
